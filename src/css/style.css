@@ -1,0 +1,63 @@
+/*------------------------------
+------------ GLOBAL ------------
+------------------------------*/
+
+*, ::before, ::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/*------------------------------
+------------ LAYOUT ------------
+------------------------------*/
+
+body {
+    min-height: 100vh;
+    font-family: "Lato", sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    width: 100%;
+    max-width: 1000px;
+    height: 750px;
+    padding: 0 25px;
+    background-color: #eee;
+    border: 1px solid #aaa;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+header, nav, main, footer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+header {
+    min-height: 75px;
+}
+
+nav {
+    max-width: 250px;
+    min-height: calc(100% - 150px);
+    background-color: #fff;
+    border: 1px solid #aaa;
+    border-right: none;
+}
+
+main {
+    max-width: calc(100% - 250px);
+    min-height: calc(100% - 150px);
+    background-color: #fff;
+    border: 1px solid #aaa;
+    border-left: none;
+}
+
+footer {
+    min-height: 75px;
+}
