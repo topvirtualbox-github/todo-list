@@ -45,19 +45,65 @@ header {
 nav {
     max-width: 250px;
     min-height: calc(100% - 150px);
+    padding: 25px;
     background-color: #fff;
     border: 1px solid #aaa;
     border-right: none;
+    justify-content: start;
+    flex-direction: column;
 }
 
 main {
     max-width: calc(100% - 250px);
     min-height: calc(100% - 150px);
+    padding: 25px 25px 25px 0;
     background-color: #fff;
     border: 1px solid #aaa;
     border-left: none;
+    justify-content: start;
+    flex-direction: column;
 }
 
 footer {
     min-height: 75px;
+}
+
+/*------------------------------
+------------ HEADER ------------
+------------------------------*/
+
+/*------------------------------
+------------- NAV --------------
+------------------------------*/
+
+.folder {
+    width: 100%;
+    min-height: 50px;
+    margin-bottom: 25px;
+    background-color: #eee;
+    border: 1px solid #aaa;
+    cursor: pointer;
+}
+
+/*------------------------------
+------------- MAIN -------------
+------------------------------*/
+
+.todo {
+    width: 100%;
+    min-height: 50px;
+    margin-bottom: 25px;
+    border: 1px solid #aaa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/*------------------------------
+------------ FOOTER ------------
+------------------------------*/
+
+.github {
+    color: #000;
+    font-size: 2rem;
 }
