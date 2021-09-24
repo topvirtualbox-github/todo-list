@@ -17,4 +17,15 @@ const addTodo = (e) => {
     current.list.push(todo);
 }
 
-export { folders, current, addTodo };
+const folderFactory = (name, list = []) => {
+    return { name, list };
+}
+
+const addFolder = (e) => {
+    const name = document.querySelector(".name").value;
+    e.preventDefault();
+    const folder = folderFactory(name);
+    folders.push(folder);
+}
+
+export { folders, current, addTodo, addFolder };
