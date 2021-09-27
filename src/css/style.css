@@ -21,14 +21,15 @@ body {
 }
 
 .container {
+    position: relative;
     width: 100%;
     max-width: 1000px;
     height: 750px;
-    padding: 0 25px;
     background-color: #eee;
     border: 1px solid #aaa;
+    overflow: hidden;
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
 }
 
 header, nav, main, footer {
@@ -43,12 +44,16 @@ header {
 }
 
 nav {
+    position: absolute;
+    top: 75px;
+    left: 0;
     max-width: 250px;
     min-height: calc(100% - 150px);
     padding: 25px;
     background-color: #fff;
     border: 1px solid #aaa;
-    border-right: none;
+    border-left: none;
+    transition: transform 0.5s;
     justify-content: start;
     flex-direction: column;
 }
@@ -56,25 +61,39 @@ nav {
 main {
     max-width: calc(100% - 250px);
     min-height: calc(100% - 150px);
-    padding: 25px 25px 25px 0;
-    background-color: #fff;
-    border: 1px solid #aaa;
-    border-left: none;
+    padding: 25px;
+    transition: max-width 0.5s;
     justify-content: start;
     flex-direction: column;
+    align-self: end;
 }
 
 footer {
     min-height: 75px;
 }
 
+button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
 /*------------------------------
 ------------ HEADER ------------
 ------------------------------*/
 
+.bars {
+    padding: 0.5rem;
+    font-size: 2rem;
+}
+
 /*------------------------------
 ------------- NAV --------------
 ------------------------------*/
+
+nav.close {
+    transform: translateX(-250px);
+}
 
 .folder {
     width: 100%;
@@ -82,39 +101,43 @@ footer {
     margin-bottom: 25px;
     background-color: #eee;
     border: 1px solid #aaa;
-    cursor: pointer;
 }
 
 .new-folder {
+    width: 100%;
     min-height: 50px;
-    padding: 0 1rem;
-    background-color: #eee;
-    border: 1px solid #aaa;
-    cursor: pointer;
+    border: 1px solid #000;
 }
 
 .form-folder {
     width: 100%;
     min-height: 100px;
-    padding: 0 10px;
-    background-color: #eee;
-    border: 1px solid #aaa;
+    padding: 0 1rem;
+    border: 1px solid #000;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
     flex-direction: column;
 }
 
-.name {
+.input-name {
     width: 100%;
     min-height: 30px;
-    padding: 0 0.5rem;
-    border: 1px solid #aaa;
+    border: 1px solid #000;
+    text-align: center;
+}
+
+.submit-folder {
+    font-size: 1.5rem;
 }
 
 /*------------------------------
 ------------- MAIN -------------
 ------------------------------*/
+
+main.big {
+    max-width: 100%;
+}
 
 .todo {
     width: 100%;
@@ -127,37 +150,33 @@ footer {
 }
 
 .new-todo {
+    width: 100%;
+    max-width: 150px;
     min-height: 50px;
-    padding: 0 1rem;
-    background-color: #eee;
-    border: 1px solid #aaa;
-    cursor: pointer;
+    border: 1px solid #000;
 }
 
 .form-todo {
-    min-height: 50px;
-    padding: 0 10px;
-    background-color: #eee;
-    border: 1px solid #aaa;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.task {
     width: 100%;
     max-width: 350px;
-    min-height: 30px;
-    padding: 0 0.5rem;
-    border: 1px solid #aaa;
+    min-height: 100px;
+    padding: 0 1rem;
+    border: 1px solid #000;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
 }
 
-.submit {
-    margin-left: 10px;
-    background-color: transparent;
-    border: none;
+.input-task {
+    width: 100%;
+    min-height: 30px;
+    padding: 0 0.5rem;
+    border: 1px solid #000;
+}
+
+.submit-todo {
     font-size: 1.5rem;
-    cursor: pointer;
 }
 
 /*------------------------------
@@ -165,6 +184,16 @@ footer {
 ------------------------------*/
 
 .github {
+    padding: 0.5rem;
     color: #000;
     font-size: 2rem;
+    text-decoration: none;
+}
+
+/*------------------------------
+------------ MEDIA -------------
+------------------------------*/
+
+@media (max-width: 600px) {
+    main.small { max-width: 100%; }
 }

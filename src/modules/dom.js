@@ -1,5 +1,10 @@
 import { folders, current, addTodo, addFolder } from "./app.js";
 
+const renderAll = () => {
+    renderFolders();
+    renderTodoList(current);
+}
+
 const renderFolders = () => {
     const nav = document.querySelector("nav");
     while (nav.hasChildNodes()) { nav.removeChild(nav.lastChild); }
@@ -9,8 +14,7 @@ const renderFolders = () => {
         folder.textContent = folders[index].name;
         folder.addEventListener("click", () => {
             current = folders[index];
-            renderFolders();
-            renderFolderTodoList(current);
+            renderAll();
         });
         nav.append(folder);
     });
@@ -21,7 +25,7 @@ const renderFolders = () => {
     nav.append(button);
 }
 
-const renderFolderTodoList = (folder) => {
+const renderTodoList = (folder) => {
     const main = document.querySelector("main");
     while (main.hasChildNodes()) { main.removeChild(main.lastChild); }
     folder.list.forEach(object => {
@@ -37,40 +41,42 @@ const renderFolderTodoList = (folder) => {
     main.append(button);
 }
 
-const renderTodoForm = () => {
-    const main = document.querySelector("main");
-    main.removeChild(main.lastChild);
-    const form = document.createElement("form");
-    form.classList.add("form-todo");
-    main.append(form);
-    const task = document.createElement("input");
-    task.classList.add("task");
-    task.placeholder = "Task";
-    const submit = document.createElement("button");
-    submit.classList.add("submit", "fas", "fa-plus-circle");
-    submit.addEventListener("click", (e) => {
-        addTodo(e);
-        renderFolderTodoList(current);
-    });
-    form.append(task, submit);
-}
-
 const renderFolderForm = () => {
+    renderAll();
     const nav = document.querySelector("nav");
     nav.removeChild(nav.lastChild);
     const form = document.createElement("form");
     form.classList.add("form-folder");
     nav.append(form);
     const name = document.createElement("input");
-    name.classList.add("name");
-    name.placeholder = "Name";
+    name.classList.add("input-name");
+    name.placeholder = "Enter folder name";
     const submit = document.createElement("button");
-    submit.classList.add("submit", "fas", "fa-plus-circle");
+    submit.classList.add("submit-folder", "fas", "fa-plus-circle");
     submit.addEventListener("click", (e) => {
         addFolder(e);
-        renderFolders();
+        renderAll();
     });
     form.append(name, submit);
 }
 
-export { renderFolders, renderFolderTodoList };
+const renderTodoForm = () => {
+    renderAll();
+    const main = document.querySelector("main");
+    main.removeChild(main.lastChild);
+    const form = document.createElement("form");
+    form.classList.add("form-todo");
+    main.append(form);
+    const task = document.createElement("input");
+    task.classList.add("input-task");
+    task.placeholder = "Enter new task";
+    const submit = document.createElement("button");
+    submit.classList.add("submit-todo", "fas", "fa-plus-circle");
+    submit.addEventListener("click", (e) => {
+        addTodo(e);
+        renderAll();
+    });
+    form.append(task, submit);
+}
+
+export { renderAll };

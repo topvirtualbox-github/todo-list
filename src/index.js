@@ -1,9 +1,16 @@
 import "./css/normalize.css";
 import "./css/style.css";
-import { folders } from "./modules/app.js";
-import { renderFolders, renderFolderTodoList } from "./modules/dom.js";
+import { renderAll } from "./modules/dom.js";
 
-window.addEventListener("load", () => {
-    renderFolders();
-    renderFolderTodoList(folders[0]);
-});
+const START = (() =>  {
+    window.addEventListener("load", renderAll);
+    const nav = document.querySelector("nav");
+    const main = document.querySelector("main");
+    const bars = document.querySelector(".bars");
+    bars.addEventListener("click", () => {
+        nav.classList.toggle("open");
+        nav.classList.toggle("close");
+        main.classList.toggle("small");
+        main.classList.toggle("big");
+    });
+})();
