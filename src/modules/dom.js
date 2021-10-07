@@ -2,7 +2,7 @@ import { folders, current, addTodo, addFolder } from "./app.js";
 
 const renderAll = () => {
     renderFolders();
-    renderTodoList(current);
+    renderTodoList();
 }
 
 const renderFolders = () => {
@@ -11,12 +11,26 @@ const renderFolders = () => {
     folders.forEach((object, index) => {
         const folder = document.createElement("button");
         folder.classList.add("folder");
-        folder.textContent = folders[index].name;
+        folder.textContent = object.name;
         folder.addEventListener("click", () => {
-            current = folders[index];
+            current = object;
             renderAll();
         });
         nav.append(folder);
+        if (object.name !== "Default") {
+            const remove = document.createElement("button");
+            remove.classList.add("folder--remove");
+            remove.textContent = "X";
+            remove.addEventListener("click", (e) => {
+                e.stopPropagation();
+                if (confirm("Are you sure?")) {
+                    folders.splice(index, 1);
+                    current = folders[0];
+                    renderAll();
+                }
+            });
+            folder.append(remove);
+        }
     });
     const button = document.createElement("button");
     button.classList.add("new-folder");
@@ -25,14 +39,23 @@ const renderFolders = () => {
     nav.append(button);
 }
 
-const renderTodoList = (folder) => {
+const renderTodoList = () => {
     const main = document.querySelector("main");
     while (main.hasChildNodes()) { main.removeChild(main.lastChild); }
-    folder.list.forEach(object => {
+    current.list.forEach((object, index) => {
         const todo = document.createElement("div");
         todo.classList.add("todo");
-        todo.textContent = object.task;
         main.append(todo);
+        const text = document.createElement("span");
+        text.classList.add("todo--text");
+        text.textContent = object.task;
+        const remove = document.createElement("button");
+        remove.classList.add("todo--remove", "far", "fa-trash-alt");
+        remove.addEventListener("click", () => {
+            current.list.splice(index, 1);
+            renderAll();
+        });
+        todo.append(text, remove);
     });
     const button = document.createElement("button");
     button.classList.add("new-todo");
@@ -55,6 +78,7 @@ const renderFolderForm = () => {
     submit.classList.add("submit-folder", "fas", "fa-plus-circle");
     submit.addEventListener("click", (e) => {
         addFolder(e);
+        current = folders[folders.length - 1];
         renderAll();
     });
     form.append(name, submit);

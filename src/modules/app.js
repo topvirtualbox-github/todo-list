@@ -1,18 +1,27 @@
 const folders = [
-    { name: "Default", list: [{ task: "Work" }, { task: "Exercise" }, { task: "Study" }] },
-    { name: "Tutorial", list: [{ task: "Click New Folder button" }, { task: "Click New Todo button" }, { task: "Click ☰ button to close the left panel" }] },
+    { name: "Default", list: [
+        { task: "Work" },
+        { task: "Exercise" },
+        { task: "Study" },
+    ] },
+    { name: "Tutorial", list: [
+        { task: "Click New Folder button" },
+        { task: "Click New Todo button" },
+        { task: "Click ☰ button to close the left panel" },
+    ] },
 ];
 
 let current = folders[0];
 
-const folderFactory = (name, list = []) => {
+const folderFactory = (name, list) => {
     return { name, list };
 }
 
 const addFolder = (e) => {
     const name = document.querySelector(".input-name").value;
+    const list = [];
     e.preventDefault();
-    const folder = folderFactory(name);
+    const folder = folderFactory(name, list);
     folders.push(folder);
 }
 

@@ -96,11 +96,18 @@ nav.close {
 }
 
 .folder {
+    position: relative;
     width: 100%;
     min-height: 50px;
     margin-bottom: 25px;
     background-color: #eee;
     border: 1px solid #aaa;
+}
+
+.folder--remove {
+    position: absolute;
+    top: 0;
+    right: 3px;
 }
 
 .new-folder {
@@ -143,10 +150,19 @@ main.big {
     width: 100%;
     min-height: 50px;
     margin-bottom: 25px;
+    padding: 0 1rem;
     border: 1px solid #aaa;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.todo--text {
+    flex-grow: 1;
+}
+
+.todo--remove {
+    font-size: 1.2rem;
 }
 
 .new-todo {
