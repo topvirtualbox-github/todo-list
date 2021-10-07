@@ -1,4 +1,4 @@
-import { folders, current, addTodo, addFolder } from "./app.js";
+import { customFolders, current, addTodo, addFolder, saveStorage } from "./app.js";
 
 const renderAll = () => {
     renderFolders();
@@ -8,7 +8,7 @@ const renderAll = () => {
 const renderFolders = () => {
     const nav = document.querySelector("nav");
     while (nav.hasChildNodes()) { nav.removeChild(nav.lastChild); }
-    folders.forEach((object, index) => {
+    customFolders.forEach((object, index) => {
         const folder = document.createElement("button");
         folder.classList.add("folder");
         folder.textContent = object.name;
@@ -24,8 +24,9 @@ const renderFolders = () => {
             remove.addEventListener("click", (e) => {
                 e.stopPropagation();
                 if (confirm("Are you sure?")) {
-                    folders.splice(index, 1);
-                    current = folders[0];
+                    customFolders.splice(index, 1);
+                    current = customFolders[0];
+                    saveStorage();
                     renderAll();
                 }
             });
@@ -53,6 +54,7 @@ const renderTodoList = () => {
         remove.classList.add("todo--remove", "far", "fa-trash-alt");
         remove.addEventListener("click", () => {
             current.list.splice(index, 1);
+            saveStorage();
             renderAll();
         });
         todo.append(text, remove);
@@ -78,7 +80,7 @@ const renderFolderForm = () => {
     submit.classList.add("submit-folder", "fas", "fa-plus-circle");
     submit.addEventListener("click", (e) => {
         addFolder(e);
-        current = folders[folders.length - 1];
+        current = customFolders[customFolders.length - 1];
         renderAll();
     });
     form.append(name, submit);

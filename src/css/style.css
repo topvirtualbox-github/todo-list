@@ -40,6 +40,7 @@ header, nav, main, footer {
 }
 
 header {
+    position: relative;
     min-height: 75px;
 }
 
@@ -85,6 +86,12 @@ button {
 .bars {
     padding: 0.5rem;
     font-size: 2rem;
+}
+
+.reset {
+    position: absolute;
+    top: 5px;
+    right: 5px;
 }
 
 /*------------------------------

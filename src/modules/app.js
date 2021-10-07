@@ -1,4 +1,6 @@
-const folders = [
+let customFolders = [];
+
+const defaultFolders = [
     { name: "Default", list: [
         { task: "Work" },
         { task: "Exercise" },
@@ -11,7 +13,7 @@ const folders = [
     ] },
 ];
 
-let current = folders[0];
+let current;
 
 const folderFactory = (name, list) => {
     return { name, list };
@@ -22,7 +24,8 @@ const addFolder = (e) => {
     const list = [];
     e.preventDefault();
     const folder = folderFactory(name, list);
-    folders.push(folder);
+    customFolders.push(folder);
+    saveStorage();
 }
 
 const todoFactory = (task) => {
@@ -34,6 +37,22 @@ const addTodo = (e) => {
     e.preventDefault();
     const todo = todoFactory(task);
     current.list.push(todo);
+    saveStorage();
 }
 
-export { folders, current, addFolder, addTodo };
+function saveStorage() {
+    localStorage.setItem("folders", JSON.stringify(customFolders));
+}
+
+function loadStorage() {
+    const storage = localStorage.getItem("folders");
+    if (!storage) {
+        localStorage.setItem("folders", JSON.stringify(defaultFolders));
+        customFolders = JSON.parse(localStorage.getItem("folders"));
+    } else {
+        customFolders = JSON.parse(localStorage.getItem("folders"));
+    }
+    current = customFolders[0];
+}
+
+export { customFolders, current, addFolder, addTodo, loadStorage, saveStorage };
